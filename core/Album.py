@@ -28,11 +28,16 @@ class Album:
     def addSong(self, song):
         self.songs.append(song)
         self.updateRating()
+        self.updateRaters(song.raters)
 
 
     def addInterpret(self, interpret):
         self.interpret.append(interpret)
     
+
+    def updateRaters(self, raters):
+        for rater in raters:
+            self.raters.add(rater)
 
     def addRater(self, rater):
         self.raters.add(rater)

@@ -1,6 +1,6 @@
 class Song:
 
-    def __init__(self, name="", album=""):
+    def __init__(self, name="", album=None):
         self.name = name
         self.album = album
         self.rating = 0

@@ -30,6 +30,14 @@ class AlbumTest(unittest.TestCase):
     def test_oneSongRated(self):
         album = Album("JBG3", ["Kollegah", "Farid Bang"])
         song = Song("Dynamit", album)
+        user = User("Tobi")
+        song.addRating(user, 10)
+        album.addSong(song)
+        self.assertEqual(10, album.rating)
+
+    def test_addRatingToExistingSong(self):
+        album = Album("JBG3", ["Kollegah", "Farid Bang"])
+        song = Song("Dynamit", album)
         album.addSong(song)
         user = User("Tobi")
         song.addRating(user, 10)
