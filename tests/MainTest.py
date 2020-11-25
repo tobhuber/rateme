@@ -51,6 +51,14 @@ class AlbumTest(unittest.TestCase):
         song.addRating(user, 0)
         self.assertEqual(0, album.rating)
 
+    def test_songAddsAlbumRater(self):
+        album = Album("JBG3", ["Kollegah", "Farid Bang"])
+        song = Song("Dynamit", album)
+        album.addSong(song)
+        user = User("Tobi")
+        song.addRating(user, 10)
+        self.assertEqual(album.raters.pop(), user)
+
 class SongTest(unittest.TestCase):
 
     def test_songInit(self):
