@@ -11,6 +11,7 @@ class Album:
         self.songs = []
         self.raters = set()
         self.cover = cover
+        self.hash = f"{self.title}#{self.interpret[0]}"
 
 
     # calculate median of song ratings
@@ -18,26 +19,29 @@ class Album:
         result = 0
         for song in self.songs: 
             result += song.rating
+        
         return 0 if len(self.songs) == 0 else result / len(self.songs)
 
 
     def updateRating(self):
-        self.rating = self.calculateRating()
+        self.rating = round(self.calculateRating(), 1)
 
 
     def addSong(self, song):
         self.songs.append(song)
         self.updateRating()
-        self.updateRaters(song.raters)
+        self.updateRaters()
 
 
     def addInterpret(self, interpret):
         self.interpret.append(interpret)
     
 
-    def updateRaters(self, raters):
-        for rater in raters:
-            self.raters.add(rater)
+    def updateRaters(self):
+        self.raters = set()
+        for song in self.songs:
+            self.raters.update(set(song.raters.keys()))
 
     def addRater(self, rater):
         self.raters.add(rater)
+        

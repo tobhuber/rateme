@@ -16,7 +16,6 @@ class Loader:
             users[user["name"]] = User(user["name"])
 
         alben = {}
-        songs = {}
 
         for album in data["album"]:
 
@@ -26,21 +25,15 @@ class Loader:
             alb = Album(album_title, album_interpret, album_cover)
 
             for song in album["songs"]:
-                
                 song_name = song["name"]
-                song_album_name = song["album"]
-                son = Song(song_name, alb)
-
+                son = Song(name=song_name, album=alb, raters={}, rating=0)
                 for rater in song["raters"]:
                     son.addRating(users[rater["name"]], rater["rating"])
-
                 alb.addSong(son)
-                songs[f"{song_album_name}#{song_name}"] = son
             
-            alben[album_title + album_interpret] = alb
+            alben[alb.hash] = alb
 
         db.user = users
-        db.songs = songs
         db.albums = alben
 
         return db
