@@ -26,6 +26,7 @@ class SongListItem(QWidget):
         self.song_rating.setMaximum(10)
         self.song_rating.setSingleStep(1)
         self.song_rating.valueChanged.connect(self.value_changed)
+        self.song_rating.wheelEvent = lambda event: None
         
         self.layout.addWidget(song_name)
         self.layout.addWidget(self.song_rating)

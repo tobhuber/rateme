@@ -4,17 +4,16 @@ from PySide2.QtWidgets import QPushButton
 from PySide2.QtWidgets import QLabel
 from PySide2.QtWidgets import QLineEdit
 
-class EditUserDialog(QDialog):
-    def __init__(self, db, user, parent):
+class EditSongDialog(QDialog):
+    def __init__(self, db, song, parent):
         super().__init__(parent)
-        self.user = user
+        self.song = song
         self.parent = parent 
         self.db = db
-        self.setWindowTitle("Edit User")
-        self.setWhatsThis(f"Enter a users name and click the 'Add'-Button or hit cancel to close this window.")
+        self.setWindowTitle("Edit Song")
         layout = QGridLayout()
 
-        label = QLabel("User Name:", self)
+        label = QLabel("Song Name:", self)
         self.line = QLineEdit(self)
 
         layout.addWidget(label, 0, 0, 1, 1)
@@ -33,10 +32,11 @@ class EditUserDialog(QDialog):
         self.show()
 
     def edit(self):
-        name = self.line.text()
-        self.db.user[self.user.name].name = name
-        self.db.user_view.refresh()
+        self.song.name = self.line.text()
+        
         self.db.album_view.refresh()
+        self.db.global_rating.refresh()
+        self.db.user_rating.refresh()
         self.accept()
 
     def cancel(self):

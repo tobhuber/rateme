@@ -7,9 +7,11 @@ from PySide2.QtWidgets import QWidget
 from PySide2.QtWidgets import QAction
 from PySide2.QtWidgets import QMenuBar
 from PySide2.QtWidgets import QFileDialog
+from PySide2.QtWidgets import QSizePolicy
 from PySide2 import QtCore
 from gui.UserList import UserList
 from gui.AlbumList import AlbumList
+from gui.StatisticsArea import StatisticsArea
 from core.Database import Database
 from files.Saver import Saver
 from files.Loader import Loader
@@ -29,10 +31,13 @@ class MainWindow(QMainWindow):
         self.init_menu_bar()
 
         self.user_list = UserList(self.db, self)
-        self.layout.addWidget(self.user_list, 1, 3, 4, 1)
+        self.layout.addWidget(self.user_list, 0, 2, 2, 1)
 
         self.album_list = AlbumList(self.db, self)
-        self.layout.addWidget(self.album_list, 1, 0, 3, 3)
+        self.layout.addWidget(self.album_list, 0, 0, 2, 1)
+
+        self.statistics_area = StatisticsArea(self.db, self)
+        self.layout.addWidget(self.statistics_area, 1, 0, 1, 2)
 
         self.central.setLayout(self.layout)
 
@@ -64,14 +69,27 @@ class MainWindow(QMainWindow):
     def refresh(self):
         self.layout.removeWidget(self.user_list)
         self.layout.removeWidget(self.album_list)
+        self.layout.removeWidget(self.statistics_area)
+
         self.user_list.deleteLater()
         self.album_list.deleteLater()
+        self.statistics_area.deleteLater()
+
         self.user_list = UserList(self.db, self)
         self.album_list = AlbumList(self.db, self)
+        self.statistics_area = StatisticsArea(self.db, self)
+
+        self.user_list.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
+        self.album_list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.statistics_area.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+
         self.db.user_view = self.user_list
         self.db.album_view = self.album_list
-        self.layout.addWidget(self.user_list, 1, 3, 4, 1)
-        self.layout.addWidget(self.album_list, 1, 0, 3, 3)
+
+        self.layout.addWidget(self.user_list, 0, 2, 2, 1)
+        self.layout.addWidget(self.album_list, 0, 0, 1, 2)
+        self.layout.addWidget(self.statistics_area, 1, 0, 1, 2)
+
 
 
 if __name__ == "__main__":

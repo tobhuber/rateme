@@ -22,21 +22,17 @@ class Album:
         
         return 0 if len(self.songs) == 0 else result / len(self.songs)
 
-
     def updateRating(self):
         self.rating = round(self.calculateRating(), 1)
-
 
     def addSong(self, song):
         self.songs.append(song)
         self.updateRating()
         self.updateRaters()
 
-
     def addInterpret(self, interpret):
         self.interpret.append(interpret)
     
-
     def updateRaters(self):
         self.raters = set()
         for song in self.songs:
@@ -44,4 +40,7 @@ class Album:
 
     def addRater(self, rater):
         self.raters.add(rater)
+    
+    def deleteSong(self, song):
+        self.songs.remove(song)
         

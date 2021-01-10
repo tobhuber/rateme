@@ -85,6 +85,8 @@ class AlbumSortView(QDialog):
                      songs[song.hash].addRating(rater, rating)
 
         self.db.album_view.refresh()
+        self.db.global_rating.refresh()
+        self.db.user_rating.refresh()
         self.accept()
 
     def cancel(self):
@@ -100,6 +102,8 @@ class AlbumSortView(QDialog):
             
 
     def get_raters_rating(self):
+        if self.rater_box.count() == 0:
+            return
         rater = self.db.user[self.rater_box.currentText()]
         for i in range(self.list.count()):
             widget = self.list.itemWidget(self.list.item(i))
@@ -126,3 +130,7 @@ class AlbumSortView(QDialog):
     def check_all(self):
         for i in range(self.list.count()):
             self.list.itemWidget(self.list.item(i)).changed.setChecked(True)
+
+    def uncheck_all(self):
+        for i in range(self.list.count()):
+            self.list.itemWidget(self.list.item(i)).changed.setChecked(False)
