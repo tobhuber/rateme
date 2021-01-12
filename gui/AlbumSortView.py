@@ -54,7 +54,7 @@ class AlbumSortView(QDialog):
         rater_label = QLabel("Rater:")
         self.rater_box = QComboBox()
 
-        for name in self.db.user:
+        for name in sorted(self.db.user):
             self.rater_box.addItem(self.db.user[name].name)
 
         self.rater_box.currentTextChanged.connect(self.get_raters_rating)

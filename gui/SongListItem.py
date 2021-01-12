@@ -15,7 +15,6 @@ class SongListItem(QWidget):
         self.layout = QHBoxLayout()
         self.init_data()
         self.setLayout(self.layout)
-        self.show()
 
     def init_data(self):
         self.changed = QCheckBox()

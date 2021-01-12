@@ -16,7 +16,6 @@ class UserRating(QGroupBox):
 
         self.refresh()
         self.setLayout(self.layout)
-        self.show()
 
 
     def refresh(self):

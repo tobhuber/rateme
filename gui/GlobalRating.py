@@ -17,7 +17,6 @@ class GlobalRating(QGroupBox):
         self.refresh()
         self.setTitle("Best rated Songs")
         self.setLayout(self.layout)
-        self.show()
 
 
     def refresh(self):

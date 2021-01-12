@@ -11,7 +11,6 @@ class AddUserDialog(QDialog):
         self.parent = parent 
         self.db = db
         self.setWindowTitle("Add User")
-        self.setWhatsThis(f"Enter a users name and click the 'Add'-Button or hit cancel to close this window.")
         layout = QGridLayout()
 
         label = QLabel("User Name:", self)

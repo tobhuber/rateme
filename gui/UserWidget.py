@@ -19,9 +19,11 @@ class UserWidget(QWidget):
         self.init_user()
         self.init_delete()
         self.init_edit()
+        self.mouseMoveEvent = lambda x: None
+        self.mousePressEvent = lambda x: None
+        self.mouseReleaseEvent = lambda x: None
 
         self.setLayout(self.layout)
-        self.show()
 
     def init_user(self):
         self.user_button = QPushButton(self.user.name)

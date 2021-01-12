@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['mainwindow.py'],
-             pathex=['/home/tobi/Projects/rateme'],
+             pathex=['C:\\Users\\tobi (nvidia)\\Documents\\Projects\\rateme'],
              binaries=[],
              datas=[('db.json', '.')],
              hiddenimports=[],

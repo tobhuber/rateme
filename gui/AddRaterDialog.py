@@ -22,7 +22,7 @@ class AddRaterDialog(QDialog):
         name_label = QLabel("Choose Rater:")
         self.name_box = QComboBox()
 
-        for name in self.db.user:
+        for name in sorted(self.db.user):
             self.name_box.addItem(self.db.user[name].name)
 
         rating_label = QLabel("Rating:")

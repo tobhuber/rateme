@@ -29,4 +29,3 @@ class RatingListItem(QWidget):
         self.layout.addWidget(self.interpret)
         self.layout.addWidget(self.rating)
         self.setLayout(self.layout)
-        self.show()

@@ -40,9 +40,8 @@ class UserList(QGroupBox):
     def refresh(self):
         self.list.deleteLater()
         self.list = QListWidget()
-        print(self.db.user)
 
-        for name in self.db.user:
+        for name in sorted(self.db.user):
             item = QListWidgetItem(self.list)
             self.list.addItem(item)
             user_item = UserWidget(self.db, self.db.user[name], item)

@@ -110,7 +110,7 @@ class AlbumWidget(QTabWidget):
         self.song_box = QComboBox()
 
         for song in self.album.songs:
-            self.song_box.addItem(f"{song.name}: {song.rating}")
+            self.song_box.addItem(f"{song.rating}    {song.name}")
 
         song_layout = QGridLayout()
         
@@ -119,9 +119,9 @@ class AlbumWidget(QTabWidget):
 
         rater_label = QLabel("Raters:")
         self.rater_box = QComboBox()
-
-        for rater in self.album.raters:
-            self.rater_box.addItem(rater.name)
+        rater_list = sorted([rater.name for rater in self.album.raters])
+        for item in rater_list:
+            self.rater_box.addItem(item)
 
         rating_label = QLabel("Rating:")
         self.rating = QSlider()
@@ -151,7 +151,7 @@ class AlbumWidget(QTabWidget):
         self.layout.addLayout(data_layout)
 
     def add_song(self):
-        dialog = AddSongDialog(self.parent.db, self.album, self)
+        _ = AddSongDialog(self.parent.db, self.album, self)
 
     def refresh(self):
         self.song_box.clear()
@@ -160,8 +160,10 @@ class AlbumWidget(QTabWidget):
         for song in self.album.songs:
             self.song_box.addItem(f"{song.name}: {song.rating}")
 
-        for rater in self.album.raters:
-            self.rater_box.addItem(rater.name)
+        rater_list = sorted([rater.name for rater in self.album.raters])
+        print(rater_list)
+        for item in rater_list:
+            self.rater_box.addItem(item)
 
         self.init_songs()
         self.rating.setValue(self.album.rating)

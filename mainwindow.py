@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         self.central = QWidget()
         self.setCentralWidget(self.central)
         self.setWindowTitle("RateMe")
-        self.resize(1280, 750)
+        self.resize(1100, 820)
         self.layout = QGridLayout()
         self.init_menu_bar()
 
@@ -53,18 +53,26 @@ class MainWindow(QMainWindow):
         file.addAction(imp)
         save = QAction("Save", self)    
         save.setShortcut("Ctrl+S")
-        save.triggered.connect(self.save_dialog)
+        save.triggered.connect(self.save)
         file.addAction(save)
+        save_as = QAction("Save As", self)
+        save_as.triggered.connect(self.save_as_dialog)
+        file.addAction(save_as)
         
     def import_dialog(self):
         loader = Loader()
-        path, modus = QFileDialog().getOpenFileName()
+        path, _ = QFileDialog().getOpenFileName(None, "Import", "", "json (*.json)")
         self.db = loader.load(path)
         self.refresh()
 
-    def save_dialog(self):
+    def save(self):
         saver = Saver()
-        path, mode = QFileDialog().getSaveFileName()
+        path = './db.json'
+        saver.save(self.db, path)
+
+    def save_as_dialog(self):
+        saver = Saver()
+        path, _ = QFileDialog().getSaveFileName(None, "Save As", "", "json (*.json)")
         saver.save(self.db, path)
 
     def refresh(self):
@@ -84,6 +92,8 @@ class MainWindow(QMainWindow):
         self.album_list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.statistics_area.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
 
+        self.db.user_view = self.user_list
+        self.db.album_view = self.album_list
 
         self.layout.addWidget(self.user_list, 0, 2, 2, 1)
         self.layout.addWidget(self.album_list, 0, 0, 1, 2)

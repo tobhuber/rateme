@@ -23,7 +23,6 @@ class AlbumSongListItem(QWidget):
         self.layout.addWidget(self.delete_button)
         self.layout.addWidget(self.edit_button)
         self.setLayout(self.layout)
-        self.show()
 
     def delete(self):
         msg_box = QMessageBox()
