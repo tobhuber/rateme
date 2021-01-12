@@ -1,11 +1,12 @@
 class Database:
-    def __init__(self, user={}, albums={}, user_view=None, album_view=None, global_rating=None, user_rating=None):
+    def __init__(self, user={}, albums={}, user_view=None, album_view=None, global_rating=None, user_rating=None, mainwindow=None):
         self.user = user
         self.albums = albums
         self.user_view = user_view
         self.album_view = album_view
         self.global_rating = global_rating
         self.user_rating = user_rating
+        self.mainwindow = mainwindow
         self.current_user = None
 
     def songs(self):

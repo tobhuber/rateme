@@ -130,9 +130,15 @@ class AlbumWidget(QTabWidget):
         self.rating.setMinimum(0)
         self.rating.setMaximum(10)
         self.rating.setValue(int(self.album.rating))
+        self.rating.wheelEvent = lambda x: None
+        self.rating.mousePressEvent = lambda x: None
+        self.rating.mouseMoveEvent = lambda x: None
+        self.rating.mouseReleaseEvent =  lambda x: None
         self.rating_edit = QLineEdit()
         self.rating_edit.setText(f"{self.album.rating}/10")
         self.rating_edit.setReadOnly(True)
+        self.rating_edit.setFixedWidth(65)
+        self.rating_edit.setAlignment(Qt.AlignRight)
         rating_layout = QHBoxLayout()
         rating_layout.addWidget(self.rating)
         rating_layout.addWidget(self.rating_edit)
@@ -171,9 +177,7 @@ class AlbumWidget(QTabWidget):
 
         if ret == QMessageBox.Yes:    
             self.db.delete_album(self.album)
-            self.db.album_view.refresh()
-            self.db.global_rating.refresh()
-            self.db.user_rating.refresh()       
+            self.db.mainwindow.refresh()     
 
     def edit(self):
         view = EditAlbumDialog(self.db, self.album, self) 

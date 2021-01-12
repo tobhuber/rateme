@@ -35,9 +35,7 @@ class AlbumSongListItem(QWidget):
 
         if ret == QMessageBox.Yes:   
             self.album.deleteSong(self.song)
-            self.widget.refresh()
-            self.db.global_rating.refresh()
-            self.db.user_rating.refresh()
+            self.db.mainwindow.refresh()
 
     def edit(self):
         dialog = EditSongDialog(self.db, self.song, self.widget)

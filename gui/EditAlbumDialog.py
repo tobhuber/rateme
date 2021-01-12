@@ -40,9 +40,7 @@ class EditAlbumDialog(QDialog):
     def edit(self):
         self.album.title = self.title_edit.text()
         self.album.interpret = [self.interpret_edit.text()]
-        self.db.album_view.refresh()
-        self.db.global_rating.refresh()
-        self.db.user_rating.refresh()
+        self.db.mainwindow.refresh()
         self.accept()
 
     def cancel(self):

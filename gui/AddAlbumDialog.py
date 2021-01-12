@@ -87,7 +87,7 @@ class AddAlbumDialog(QDialog):
         self.interpret = self.interpret_edit.text()
         alb = Album(self.title, [self.interpret], self.cover)
         self.db.albums[alb.hash] = alb
-        self.parent.refresh()
+        self.db.mainwindow.refresh()
         self.accept()       
 
 

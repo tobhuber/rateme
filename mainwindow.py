@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         self.central = QWidget()
         self.setCentralWidget(self.central)
         self.setWindowTitle("RateMe")
-        self.resize(1280, 720)
+        self.resize(1280, 750)
         self.layout = QGridLayout()
         self.init_menu_bar()
 
@@ -40,6 +40,7 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.statistics_area, 1, 0, 1, 2)
 
         self.central.setLayout(self.layout)
+        self.db.mainwindow = self
 
         self.refresh()
 
@@ -83,8 +84,6 @@ class MainWindow(QMainWindow):
         self.album_list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.statistics_area.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        self.db.user_view = self.user_list
-        self.db.album_view = self.album_list
 
         self.layout.addWidget(self.user_list, 0, 2, 2, 1)
         self.layout.addWidget(self.album_list, 0, 0, 1, 2)

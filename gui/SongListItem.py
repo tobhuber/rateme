@@ -29,6 +29,7 @@ class SongListItem(QWidget):
         self.song_rating.wheelEvent = lambda event: None
         
         self.layout.addWidget(song_name)
+        self.layout.addStretch()
         self.layout.addWidget(self.song_rating)
         self.layout.addWidget(self.changed)
 

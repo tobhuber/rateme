@@ -35,9 +35,7 @@ class EditSongDialog(QDialog):
     def edit(self):
         self.song.name = self.line.text()
         
-        self.db.album_view.refresh()
-        self.db.global_rating.refresh()
-        self.db.user_rating.refresh()
+        self.db.mainwindow.refresh()
         self.accept()
 
     def cancel(self):

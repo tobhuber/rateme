@@ -52,10 +52,7 @@ class UserWidget(QWidget):
             if self.db.current_user == self.user:
                 self.db.current_user = None
             self.db.delete_user(self.user)
-            self.db.user_view.refresh()
-            self.db.album_view.refresh()
-            self.db.global_rating.refresh()
-            self.db.user_rating.refresh()
+            self.db.mainwindow.refresh()
 
     def edit(self):
         dialog = EditUserDialog(self.db, self.user, self)

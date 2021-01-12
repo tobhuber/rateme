@@ -85,9 +85,7 @@ class AlbumSortView(QDialog):
                  if changed:
                      songs[song.hash].addRating(rater, rating)
 
-        self.parent.refresh()
-        self.db.global_rating.refresh()
-        self.db.user_rating.refresh()
+        self.db.mainwindow.refresh()
         self.accept()
 
     def cancel(self):
