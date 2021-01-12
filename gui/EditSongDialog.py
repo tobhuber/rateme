@@ -3,6 +3,7 @@ from PySide2.QtWidgets import QGridLayout
 from PySide2.QtWidgets import QPushButton
 from PySide2.QtWidgets import QLabel
 from PySide2.QtWidgets import QLineEdit
+from core.User import User
 
 class EditSongDialog(QDialog):
     def __init__(self, db, song, parent):

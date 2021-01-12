@@ -32,9 +32,6 @@ class AlbumWidget(QTabWidget):
         self.songs = QWidget()
         self.init_overview()
         self.init_songs()
-        self.addTab(self.overview, "Overview")
-        self.addTab(self.songs, "Songs")
-
 
     def init_overview(self):
         self.layout = QVBoxLayout()
@@ -42,6 +39,8 @@ class AlbumWidget(QTabWidget):
         self.init_top()
         self.init_cover_area()
         self.init_data_area()
+        self.addTab(self.overview, "Overview")
+
 
     def init_songs(self):
         self.songs.deleteLater()
@@ -52,12 +51,14 @@ class AlbumWidget(QTabWidget):
         for song in self.album.songs:
             item = QListWidgetItem(self.song_list)
             self.song_list.addItem(item)
-            song_item = AlbumSongListItem(self.db, self.album, song)
+            song_item = AlbumSongListItem(self.db, self.album, song, self)
             item.setSizeHint(song_item.sizeHint())
             self.song_list.setItemWidget(item, song_item)
         
         self.song_layout.addWidget(self.song_list)
         self.songs.setLayout(self.song_layout)
+        self.addTab(self.songs, "Songs")
+
         
 
 
@@ -156,6 +157,7 @@ class AlbumWidget(QTabWidget):
         for rater in self.album.raters:
             self.rater_box.addItem(rater.name)
 
+        self.init_songs()
         self.rating.setValue(self.album.rating)
         self.rating_edit.setText(f"{self.album.rating}/10")
 

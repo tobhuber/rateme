@@ -13,8 +13,9 @@ from gui.SongListItem import SongListItem
 
 class AlbumSortView(QDialog):
     def __init__(self, db, album, parent):
-        super().__init__(parent)
+        super().__init__()
         self.db = db
+        self.parent = parent
         self.album = album
         self.changes = {}
         self.layout = QGridLayout()
@@ -84,7 +85,7 @@ class AlbumSortView(QDialog):
                  if changed:
                      songs[song.hash].addRating(rater, rating)
 
-        self.db.album_view.refresh()
+        self.parent.refresh()
         self.db.global_rating.refresh()
         self.db.user_rating.refresh()
         self.accept()
