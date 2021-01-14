@@ -26,7 +26,7 @@ class Database:
         del self.albums[album.hash]
 
     def songs_rated(self):
-        return [song for song in sorted(self.songs().values(), key=lambda x: x.rating, reverse=True)]
+        return [song for song in sorted(self.songs().values(), key=lambda x: x.rating, reverse=True) if song.rating > 0]
 
     def songs_rated_by(self, rater):
         songs_by_user = list(filter(lambda song: rater in song.raters, self.songs().values()))

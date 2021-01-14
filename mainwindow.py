@@ -8,6 +8,7 @@ from PySide2.QtWidgets import QAction
 from PySide2.QtWidgets import QMenuBar
 from PySide2.QtWidgets import QFileDialog
 from PySide2.QtWidgets import QSizePolicy
+from PySide2.QtGui import QIcon
 from PySide2 import QtCore
 from gui.UserList import UserList
 from gui.AlbumList import AlbumList
@@ -17,7 +18,9 @@ from files.Saver import Saver
 from files.Loader import Loader
 
 
-
+from PySide2.QtWinExtras import QtWin
+myappid = 'mycompany.myproduct.subproduct.version'
+QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -103,6 +106,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication([])
+    app.setWindowIcon(QIcon('recources/ratemeicon.ico'))
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

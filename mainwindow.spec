@@ -6,7 +6,7 @@ block_cipher = None
 a = Analysis(['mainwindow.py'],
              pathex=['C:\\Users\\tobi (nvidia)\\Documents\\Projects\\rateme'],
              binaries=[],
-             datas=[('db.json', '.')],
+             datas=[('db.json', '.'), ('recources/ratemeicon.ico', './recources'), ('recources/watermelonsuger.jpg', './recources'), ('recources/default.png', 'recources/'), ('recources/MadeInTheAM.jpg', 'recources/')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -26,7 +26,8 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=True,
+          icon='recources/ratemeicon.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

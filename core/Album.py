@@ -17,10 +17,13 @@ class Album:
     # calculate median of song ratings
     def calculateRating(self):
         result = 0
+        i = 0
         for song in self.songs: 
-            result += song.rating
+            if song.rating > 0:
+                result += song.rating
+                i += 1
         
-        return 0 if len(self.songs) == 0 else result / len(self.songs)
+        return 0 if i == 0 else result / i
 
     def updateRating(self):
         self.rating = round(self.calculateRating(), 1)

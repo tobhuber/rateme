@@ -10,7 +10,10 @@ from PySide2.QtWidgets import QLineEdit
 from PySide2.QtGui import QIcon
 from PySide2.QtGui import QPixmap
 from PySide2.QtCore import QSize
+from PySide2.QtCore import QFileInfo
 from core.Album import Album
+
+from shutil import copyfile
 
 class AddAlbumDialog(QDialog):
     def __init__(self, db, parent):
@@ -49,7 +52,12 @@ class AddAlbumDialog(QDialog):
     def cover_dialog(self):
         path, modus = QFileDialog().getOpenFileName()
         if path:
-            self.cover = path
+            file_info = QFileInfo(path)
+            if file_info.filePath() == path:
+                self.cover = path
+            else:
+                copyfile(path, f"recources/{file_info.fileName()}")
+            self.cover = f"recources/{file_info.fileName()}"
             pixmap = QPixmap(self.cover)
             icon = QIcon(pixmap)
             self.click.setIcon(icon)

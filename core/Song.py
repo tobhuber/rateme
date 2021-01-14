@@ -1,6 +1,6 @@
 class Song:
 
-    def __init__(self, name = "", album = None, raters = {}, rating = 0):
+    def __init__(self, name = "", album = None, raters = {}, rating = -1):
         self.name = name
         self.album = album
         self.rating = rating
@@ -25,7 +25,7 @@ class Song:
         for rating in self.raters.values():
             result += rating
         
-        self.rating = 0 if len(self.raters) == 0 else round(result / len(self.raters), 2)
+        self.rating = -1 if len(self.raters) == 0 else round(result / len(self.raters), 2)
 
     def addRating(self, rater, rating):
         if rater not in self.raters:
