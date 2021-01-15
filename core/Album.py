@@ -19,7 +19,7 @@ class Album:
         result = 0
         i = 0
         for song in self.songs: 
-            if song.rating > 0:
+            if song.rating >= 0:
                 result += song.rating
                 i += 1
         
