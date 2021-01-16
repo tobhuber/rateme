@@ -6,12 +6,12 @@ from PySide2.QtWidgets import QMessageBox
 from gui.EditSongDialog import EditSongDialog
 
 class AlbumSongListItem(QWidget):
-    def __init__(self, db, album, song, widget):
+    def __init__(self, db, album, song, parent):
         super().__init__()
         self.song = song
         self.album = album
         self.db = db
-        self.widget = widget
+        self.parent = parent
         self.layout = QHBoxLayout()
         self.title = QLineEdit(self.song.name)
         self.title.setReadOnly(True)
@@ -34,7 +34,9 @@ class AlbumSongListItem(QWidget):
 
         if ret == QMessageBox.Yes:   
             self.album.deleteSong(self.song)
-            self.db.mainwindow.refresh()
+            self.parent.refresh()
+            self.db.user_rating.refresh()
+            self.db.global_rating.refresh()
 
     def edit(self):
-        dialog = EditSongDialog(self.db, self.song, self.widget)
+        dialog = EditSongDialog(self.db, self.song, self.parent)

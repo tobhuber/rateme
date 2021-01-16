@@ -64,13 +64,13 @@ class AlbumWidget(QTabWidget):
 
     def init_top(self):
         top_layout = QHBoxLayout()
-        title_edit = QLineEdit(self.album.title)
-        title_edit.setReadOnly(True)
+        self.title_edit = QLineEdit(self.album.title)
+        self.title_edit.setReadOnly(True)
         edit_button = QPushButton("Edit")
         edit_button.clicked.connect(self.edit)
         delete_button = QPushButton("Delete")
         delete_button.clicked.connect(self.delete)
-        top_layout.addWidget(title_edit)
+        top_layout.addWidget(self.title_edit)
         top_layout.addStretch()
         top_layout.addWidget(edit_button)
         top_layout.addWidget(delete_button)
@@ -100,9 +100,9 @@ class AlbumWidget(QTabWidget):
     def init_data_area(self):
         data_layout = QFormLayout()
 
-        interpret_label = QLabel("Interpret:")
-        interpret_edit = QLineEdit(self.album.interpret[0])
-        interpret_edit.setReadOnly(True)
+        self.interpret_label = QLabel("Interpret:")
+        self.interpret_edit = QLineEdit(self.album.interpret[0])
+        self.interpret_edit.setReadOnly(True)
 
         song_label = QLabel("Songs:")
         add_song_button = QPushButton("+")
@@ -143,7 +143,7 @@ class AlbumWidget(QTabWidget):
         rating_layout.addWidget(self.rating)
         rating_layout.addWidget(self.rating_edit)
 
-        data_layout.addRow(interpret_label, interpret_edit)
+        data_layout.addRow(self.interpret_label, self.interpret_edit)
         data_layout.addRow(song_label, song_layout)
         data_layout.addRow(rater_label, self.rater_box)
         data_layout.addRow(rating_label, rating_layout)
@@ -157,6 +157,8 @@ class AlbumWidget(QTabWidget):
         self.song_box.clear()
         self.rater_box.clear()
 
+        self.title_edit.setText(self.album.title)
+        self.interpret_edit.setText(self.album.interpret[0])
         for song in self.album.songs:
             self.song_box.addItem(f"{song.name}: {song.rating}")
 

@@ -86,7 +86,9 @@ class EditAlbumDialog(QDialog):
         self.album.cover = self.cover
         self.album.title = self.title_edit.text()
         self.album.interpret = [self.interpret_edit.text()]
-        self.db.mainwindow.refresh()
+        self.parent.refresh()
+        self.db.global_rating.refresh()
+        self.db.user_rating.refresh()
         self.accept()
 
     def cancel(self):

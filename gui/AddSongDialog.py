@@ -66,7 +66,9 @@ class AddSongDialog(QDialog):
         title = self.song_edit.text()
         son = Song(title, self.album, self.raters, self.rating)
         self.db.albums[self.album.hash].addSong(son)
-        self.db.mainwindow.refresh()             
+        self.parent.refresh()       
+        self.db.global_rating.refresh()
+        self.db.user_rating.refresh()      
         self.accept()
 
     def cancel(self):
